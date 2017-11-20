@@ -6,7 +6,9 @@ import java.util.HashMap;
 
 public class Restaurant extends OpenTable {
 
-    private String name, address, city, state, area, country, phone, reserveURL, mobileReserveURL, imageURL, postalCode;
+    private String name, address, city, state;
+    private String area, country, phone, reserveURL;
+    private String mobileReserveURL, imageURL, postalCode;
     private int restId, price;
     private double lat, lng;
 
