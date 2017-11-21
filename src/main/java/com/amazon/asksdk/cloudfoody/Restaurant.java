@@ -1,7 +1,6 @@
 package com.amazon.asksdk.cloudfoody;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Restaurant extends OpenTable {
