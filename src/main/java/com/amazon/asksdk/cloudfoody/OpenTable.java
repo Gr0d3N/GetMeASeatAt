@@ -26,8 +26,9 @@ public class OpenTable {
     public static HashMap getRestaurantByName(String name) throws IOException {
         String fullURL = BASE_URL + "restaurants?name=" + name;
         URLConnection connection = createConnection(fullURL);
-        return new ObjectMapper().readValue(new InputStreamReader((connection.getInputStream())), HashMap.class);
-
+        HashMap resultsHash = new ObjectMapper().readValue(new InputStreamReader((connection.getInputStream())), HashMap.class);
+        ArrayList restaurants = (ArrayList)resultsHash.get("restaurants");
+        return (HashMap)restaurants.get(0);
     }
 
     /*

@@ -22,9 +22,7 @@ public class Restaurant extends OpenTable {
     }
 
     public void setInfo(String name) throws IOException {
-        HashMap resultsHash = getRestaurantByName(name);
-        ArrayList restaurants = (ArrayList)resultsHash.get("restaurants");
-        HashMap restaurant = (HashMap)restaurants.get(0);
+        HashMap restaurant = getRestaurantByName(name);
 
         this.restId = (int) restaurant.get("id");
         this.address = (String)restaurant.get("address");
