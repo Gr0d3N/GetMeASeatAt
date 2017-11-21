@@ -1,0 +1,18 @@
+AWSTemplateFormatVersion: 2010-09-09
+Transform: AWS::Serverless-2016-10-31
+Resources:
+  GetMeASeatAt:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: "<YOUR HANDLER>"
+      Description: "Sample Lambda function for an Alexa skill"
+      Runtime: java8
+      CodeUri: ./build/libs/<YOUR LOCAL JAR>
+      Events:
+        AlexaSkillEvent:
+          Type: AlexaSkill
+      Environment:
+        Variables:
+          APPLICATION_ID: "<YOUR ALEXA APPLICATION ID>"
+      Tags:
+        Product: "AlexaSkill"
