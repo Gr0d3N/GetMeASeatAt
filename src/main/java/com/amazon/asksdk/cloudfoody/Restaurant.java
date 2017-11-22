@@ -1,9 +1,6 @@
 package com.amazon.asksdk.cloudfoody;
 
-import java.io.IOException;
-import java.util.HashMap;
-
-public class Restaurant extends OpenTable {
+public class Restaurant {
 
     private String name, address, city, state;
     private String area, country, phone, reserveURL;
@@ -11,32 +8,65 @@ public class Restaurant extends OpenTable {
     private int restId, price;
     private double lat, lng;
 
-    public Restaurant(String name) throws IOException {
-        this.setName(name);
-        this.setInfo(name);
-    }
 
     public void setName(String name) {
         this.name = name;
     }
 
-    public void setInfo(String name) throws IOException {
-        HashMap restaurant = getRestaurantByName(name);
+    public void setRestId(int restId) {
+        this.restId = restId;
+    }
 
-        this.restId = (int) restaurant.get("id");
-        this.address = (String)restaurant.get("address");
-        this.city = (String)restaurant.get("city");
-        this.state = (String)restaurant.get("state");
-        this.area = (String)restaurant.get("area");
-        this.postalCode = (String)restaurant.get("postal_code");
-        this.country = (String)restaurant.get("country");
-        this.phone = (String)restaurant.get("phone");
-        this.lat = (double) restaurant.get("lat");
-        this.lng = (double) restaurant.get("lng");
-        this.price = (int) restaurant.get("price");
-        this.reserveURL = (String)restaurant.get("reserve_url");
-        this.mobileReserveURL = (String)restaurant.get("mobile_reserve_url");
-        this.imageURL = (String)restaurant.get("image_url");
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    public void setArea(String area) {
+        this.area = area;
+    }
+
+    public void setPostalCode(String postalCode) {
+        this.postalCode = postalCode;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public void setLat(double lat) {
+        this.lat = lat;
+    }
+
+    public void setLng(double lng) {
+        this.lng = lng;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
+
+    public void setImageURL(String imageURL) {
+        this.imageURL = imageURL;
+    }
+
+    public void setMobileReserveURL(String mobileReserveURL) {
+        this.mobileReserveURL = mobileReserveURL;
+    }
+
+    public void setReserveURL(String reserveURL) {
+        this.reserveURL = reserveURL;
     }
 
     public String getName() {
