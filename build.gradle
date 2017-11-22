@@ -29,13 +29,10 @@ sourceSets {
     }
 }
 
-task buildZip(type: Zip) {
-    baseName = 'getMeASeatAt'
-    from compileJava
-    from processResources
-    into('lib') {
-        from configurations.runtime
-    }
+task fatJar(type: Jar) {
+    baseName = project.name + '-fat'
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
 }
 
-build.dependsOn buildZip
+build.dependsOn fatJar
