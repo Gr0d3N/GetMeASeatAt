@@ -1,4 +1,4 @@
-package com.amazon.asksdk.cloudfoody;
+package com.amazon.awslabs.cloudfoody;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.FileWriter;

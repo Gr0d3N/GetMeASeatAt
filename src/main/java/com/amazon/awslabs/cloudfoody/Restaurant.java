@@ -1,4 +1,4 @@
-package com.amazon.asksdk.cloudfoody;
+package com.amazon.awslabs.cloudfoody;
 
 public class Restaurant {
 
