@@ -1,20 +1,52 @@
 package com.amazon.awslabs.cloudfoody;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 public class Restaurant {
 
-    private String name, address, city, state;
-    private String area, country, phone, reserveURL;
-    private String mobileReserveURL, imageURL, postalCode;
-    private int restId, price;
-    private double lat, lng;
+    private int id;
 
+    private String name;
+
+    private String address;
+
+    private String city;
+
+    private String state;
+
+    private String area;
+
+    private String country;
+
+    private String phone;
+
+    @JsonProperty("reserve_url")
+    private String reserveURL;
+
+    @JsonProperty("mobile_reserve_url")
+    private String mobileReserveURL;
+
+    @JsonProperty("image_url")
+    private String imageURL;
+
+    @JsonProperty("postal_code")
+    private String postalCode;
+
+    private int price;
+
+    private double lat;
+
+    private double lng;
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public void setRestId(int restId) {
-        this.restId = restId;
     }
 
     public void setAddress(String address) {
@@ -69,12 +101,12 @@ public class Restaurant {
         this.reserveURL = reserveURL;
     }
 
-    public String getName() {
-        return this.name;
+    public int getId() {
+        return id;
     }
 
-    public int getRestId() {
-        return this.restId;
+    public String getName() {
+        return this.name;
     }
 
     public String getAddress() {
@@ -127,5 +159,56 @@ public class Restaurant {
 
     public String getReserveURL() {
         return reserveURL;
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .append(id)
+                .append(name)
+                .append(address)
+                .append(city)
+                .append(state)
+                .append(area)
+                .append(country)
+                .append(phone)
+                .build();
+    }
+
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder()
+                .append(id)
+                .append(name)
+                .append(address)
+                .append(city)
+                .append(state)
+                .append(area)
+                .append(country)
+                .append(phone)
+                .build();
+    }
+
+    @Override
+    public boolean equals(final Object obj) {
+        if (obj == this) {
+            return true;
+        }
+
+        if (!(obj instanceof Restaurant)) {
+            return false;
+        }
+
+        final Restaurant other = (Restaurant) obj;
+        return new EqualsBuilder()
+                .append(id, other.getId())
+                .append(name, other.getName())
+                .append(address, other.getAddress())
+                .append(city, other.getCity())
+                .append(state, other.getState())
+                .append(area, other.getArea())
+                .append(country, other.getCountry())
+                .append(phone, other.getPhone())
+                .build();
     }
 }
