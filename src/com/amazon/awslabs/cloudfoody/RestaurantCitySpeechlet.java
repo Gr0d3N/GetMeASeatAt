@@ -1,4 +1,4 @@
-package com.amazon.awslabs;
+package com.amazon.awslabs.cloudfoody;
 
 import com.amazon.speech.json.SpeechletRequestEnvelope;
 import com.amazon.speech.speechlet.IntentRequest;

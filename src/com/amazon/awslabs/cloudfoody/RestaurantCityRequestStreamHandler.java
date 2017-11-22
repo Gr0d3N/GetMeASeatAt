@@ -1,4 +1,4 @@
-package com.amazon.awslabs;
+package com.amazon.awslabs.cloudfoody;
 
 import com.amazon.speech.speechlet.lambda.SpeechletRequestStreamHandler;
 import org.slf4j.Logger;
