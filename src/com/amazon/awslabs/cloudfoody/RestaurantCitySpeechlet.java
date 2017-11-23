@@ -2,6 +2,7 @@ package com.amazon.awslabs.cloudfoody;
 
 import com.amazon.speech.json.SpeechletRequestEnvelope;
 import com.amazon.speech.slu.Intent;
+import com.amazon.speech.slu.Slot;
 import com.amazon.speech.speechlet.IntentRequest;
 import com.amazon.speech.speechlet.LaunchRequest;
 import com.amazon.speech.speechlet.SessionEndedRequest;
@@ -14,6 +15,9 @@ import com.amazon.speech.ui.Reprompt;
 import com.amazon.speech.ui.SimpleCard;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  * Speechlet to handle requests to find a restaurant in a city using Unofficial OpenTable API.
@@ -37,7 +41,7 @@ public class RestaurantCitySpeechlet implements SpeechletV2 {
         String intentName = (intent != null) ? intent.getName() : null;
 
         if ("CheckRestaurantIntent".equals(intentName)) {
-            return getWelcomeResponse(); // return getCheckRestaurantResponse();
+            return getCheckRestaurantResponse(intent);
         } else if ("AMAZON.HelpIntent".equals(intentName)) {
             return getHelpResponse();
         } else {
@@ -96,10 +100,39 @@ public class RestaurantCitySpeechlet implements SpeechletV2 {
         return reprompt;
     }
 
-/*    private SpeechletResponse getCheckRestaurantResponse(restaurantName) {
-        String restaurantName = restaurantName.replaceAll(" ", "+");
-        Restaurant restaurant = OpenTable.getRestaurantByName(restaurantName);
-        String speechText = ;
+    private SpeechletResponse getCheckRestaurantResponse(Intent intent) {
+        String restaurantName = getRestaurantName(intent);
+        restaurantName = restaurantName.replaceAll(" ", "+");
+        logger.info("Found restaurant name ", restaurantName);
+        ArrayList<Restaurant> restaurants = new ArrayList<>();
+        try {
+            restaurants = OpenTable.getRestaurantsByName(restaurantName);
+        } catch (final IOException exception) {
+            logger.warn("count not find restaurant name ", restaurantName);
+        }
 
-    }*/
+        String speechText;
+
+        if (restaurants.isEmpty()) {
+            speechText = "I could not find this restaurant in Open Table website for reservations.";
+        } else {
+            Restaurant restaurant = restaurants.get(0);
+            speechText = "I found " + restaurant.getName() + ". The restaurant is located in " + restaurant.getArea()
+                    + " and the phone number is " + restaurant.getPhone();
+        }
+
+        // Create the Simple card content.
+        SimpleCard card = getSimpleCard("CloudFoody", speechText);
+
+        // Create the plain text output.
+        PlainTextOutputSpeech speech = getPlainTextOutputSpeech(speechText);
+
+        logger.info("speechTest: ", speechText);
+        return SpeechletResponse.newTellResponse(speech, card);
+    }
+
+    private String getRestaurantName(Intent intent) {
+        Slot restaurantNameSlot = intent.getSlot("restaurant");
+        return restaurantNameSlot.getValue();
+    }
 }

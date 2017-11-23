@@ -72,8 +72,4 @@ public class OpenTable {
 
         return restaurants;
     }
-
-    public static void  main(String[] args) throws IOException {
-        getRestaurantByName("Cuocojjj");
-    }
 }
